@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import classes from './ContactData.css';
 import Input from "../../components/UI/Input/Input";
 import Button from '../../components/UI/Button/Button';
+import axios from "../../axios-hendler";
 
 class ContactData extends Component {
 state={
@@ -83,13 +84,14 @@ state={
                     {value: 'cheapest', displayValue: 'Cheapest'}
                 ]
             },
-            value: '', 
+            value: 'fastest', 
             validation: {},
             valid: true,
              touched:false
         }
     },
     formIsValid:false,
+    loading:true
    
 }
 //validation 
@@ -144,6 +146,25 @@ inputChangedHandler = (event, inputIdentifier) => {
         formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
     this.setState({orderForm: updatedOrderForm, formIsValid:formIsValid});
+}
+
+orderHeandler=(event)=>{
+    event.preventDefault();
+    const formData = {};
+        for (let formElementIdentifier in this.state.orderForm) {
+            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+        }
+        const order = {
+            orderData: formData
+        }
+        axios.post( '/orders.json', order )
+            .then( response => {
+               this.setState( { loading: false } );
+                this.props.history.push( '/' );
+            } )
+            .catch( error => {
+                this.setState( { loading: false } );
+            } );
 }
     render(){
         const formElememtArray=[];
