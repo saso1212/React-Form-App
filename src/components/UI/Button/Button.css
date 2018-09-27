@@ -28,3 +28,7 @@
     padding: 10px 15px !important;
     text-align: center;
 }
+.Button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}

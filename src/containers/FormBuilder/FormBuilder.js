@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Auxilary from "../../huc/Auxilary";
 import Modal from '../../components/UI/Modal/Modal';
-import Button from '../../components/UI/Button/Button';
+//import Button from '../../components/UI/Button/Button';
+import ContactData from '../ContactData/ContactData';
 
 class FormBuilder extends Component {
     state={
@@ -14,8 +15,7 @@ class FormBuilder extends Component {
         return(
             <Auxilary>
                 <Modal show={this.state.show} modalClosed={this.modalClicked}>
-                    <h1>Enter your contact Data:</h1>
-                    <Button btnType="Success" clicked={this.modalClicked}>Submit</Button>
+                    <ContactData />
                 </Modal>
             </Auxilary>
         )
